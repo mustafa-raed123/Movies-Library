@@ -62,17 +62,17 @@ async function trending(req, res) {
     }
 }
 async function search(req, res) {
-
-    const url = `https://api.themoviedb.org/3/search/movie?query=JACK+Reacher&api_key=${Key_api}&language=en-US`
+    const query = req.query.query;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${Key_api}&language=en-US`;
     try {
-        const axiosresult = await axios.get(url)
+        const axiosresult = await axios.get(url);
         const axiosname = axiosresult.data.results.map(items => {
-            let get = new getdata(items.id, items.title, items.release_date, items.poster_path, items.overview)
+            let get = new getdata(items.id, items.title, items.release_date, items.poster_path, items.overview);
             return get;
-        })
+        });
         res.json(axiosname);
-    } catch (error) {
-        handerError(err,req,res)    
+    } catch (error) {  
+        handerError(error, req, res);
     }
 }
 async function popular(req, res) {
