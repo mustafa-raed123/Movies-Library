@@ -7,6 +7,7 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 let pg = require('pg')
+const DATA_BASE = process.env
 const client = new pg.Client('postgresql://localhost:5432/movies')
 const port = 8080;
 const Key_api = process.env.Key_api;
